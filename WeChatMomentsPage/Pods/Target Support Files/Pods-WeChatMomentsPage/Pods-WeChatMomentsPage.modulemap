@@ -1,0 +1,6 @@
+framework module Pods_WeChatMomentsPage {
+  umbrella header "Pods-WeChatMomentsPage-umbrella.h"
+
+  export *
+  module * { export * }
+}
