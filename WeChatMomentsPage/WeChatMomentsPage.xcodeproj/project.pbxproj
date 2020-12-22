@@ -22,6 +22,14 @@
 		186D0E6E2591080E00919C4A /* DownloadAndCacheImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E6D2591080E00919C4A /* DownloadAndCacheImage.swift */; };
 		186D0E7125919EC200919C4A /* DictionaryConvertToModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E7025919EC200919C4A /* DictionaryConvertToModel.swift */; };
 		186D0E772591CFE200919C4A /* UserDefaultsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E762591CFE200919C4A /* UserDefaultsUtils.swift */; };
+		186D0E7C2591E9E900919C4A /* WeChatMomentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E7A2591E9E900919C4A /* WeChatMomentsCell.swift */; };
+		186D0E7D2591E9E900919C4A /* WeChatMomentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186D0E7B2591E9E900919C4A /* WeChatMomentsCell.xib */; };
+		186D0E7F2591EC8A00919C4A /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E7E2591EC8A00919C4A /* CommentView.swift */; };
+		186D0E822591EDF300919C4A /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E812591EDF300919C4A /* GlobalConstant.swift */; };
+		186D0E842591EE4300919C4A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E832591EE4300919C4A /* Extension.swift */; };
+		186D0E862591EEBE00919C4A /* ImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E852591EEBE00919C4A /* ImagesView.swift */; };
+		186D0E882591EF9A00919C4A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E872591EF9A00919C4A /* HeaderView.swift */; };
+		186D0E8A2591FC9300919C4A /* ObtainHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E892591FC9300919C4A /* ObtainHeight.swift */; };
 		32F7B252A0C0D007517B14E8 /* Pods_WeChatMomentsPage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B298C89F75562B96B9C42B8 /* Pods_WeChatMomentsPage.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +51,14 @@
 		186D0E6D2591080E00919C4A /* DownloadAndCacheImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadAndCacheImage.swift; sourceTree = "<group>"; };
 		186D0E7025919EC200919C4A /* DictionaryConvertToModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryConvertToModel.swift; sourceTree = "<group>"; };
 		186D0E762591CFE200919C4A /* UserDefaultsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtils.swift; sourceTree = "<group>"; };
+		186D0E7A2591E9E900919C4A /* WeChatMomentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeChatMomentsCell.swift; sourceTree = "<group>"; };
+		186D0E7B2591E9E900919C4A /* WeChatMomentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeChatMomentsCell.xib; sourceTree = "<group>"; };
+		186D0E7E2591EC8A00919C4A /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		186D0E812591EDF300919C4A /* GlobalConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
+		186D0E832591EE4300919C4A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		186D0E852591EEBE00919C4A /* ImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesView.swift; sourceTree = "<group>"; };
+		186D0E872591EF9A00919C4A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		186D0E892591FC9300919C4A /* ObtainHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObtainHeight.swift; sourceTree = "<group>"; };
 		1B298C89F75562B96B9C42B8 /* Pods_WeChatMomentsPage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeChatMomentsPage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2793A2D6E26D656670D3707 /* Pods-WeChatMomentsPage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeChatMomentsPage.debug.xcconfig"; path = "Target Support Files/Pods-WeChatMomentsPage/Pods-WeChatMomentsPage.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1605CFB901410E8D6CA06A /* Pods-WeChatMomentsPage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeChatMomentsPage.release.xcconfig"; path = "Target Support Files/Pods-WeChatMomentsPage/Pods-WeChatMomentsPage.release.xcconfig"; sourceTree = "<group>"; };
@@ -81,7 +97,8 @@
 		1837C441258B5CA700BB4288 /* WeChatMomentsPage */ = {
 			isa = PBXGroup;
 			children = (
-				186D0E602590F5BF00919C4A /* VIP-Circle */,
+				186D0E802591EDD000919C4A /* Common */,
+				186D0E602590F5BF00919C4A /* WeChatMomentPage */,
 				186D0E5C2590ADA500919C4A /* Utils */,
 				1837C442258B5CA700BB4288 /* AppDelegate.swift */,
 				1837C444258B5CA700BB4288 /* SceneDelegate.swift */,
@@ -112,7 +129,7 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		186D0E602590F5BF00919C4A /* VIP-Circle */ = {
+		186D0E602590F5BF00919C4A /* WeChatMomentPage */ = {
 			isa = PBXGroup;
 			children = (
 				186D0E6B2591003F00919C4A /* view */,
@@ -123,12 +140,17 @@
 				186D0E672590F76D00919C4A /* WeChatMomentsWorker.swift */,
 				186D0E692590F78400919C4A /* WeChatMomentsModel.swift */,
 			);
-			path = "VIP-Circle";
+			path = WeChatMomentPage;
 			sourceTree = "<group>";
 		};
 		186D0E6B2591003F00919C4A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				186D0E7A2591E9E900919C4A /* WeChatMomentsCell.swift */,
+				186D0E7B2591E9E900919C4A /* WeChatMomentsCell.xib */,
+				186D0E7E2591EC8A00919C4A /* CommentView.swift */,
+				186D0E852591EEBE00919C4A /* ImagesView.swift */,
+				186D0E872591EF9A00919C4A /* HeaderView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -155,6 +177,16 @@
 				186D0E762591CFE200919C4A /* UserDefaultsUtils.swift */,
 			);
 			path = SaveInfor;
+			sourceTree = "<group>";
+		};
+		186D0E802591EDD000919C4A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				186D0E812591EDF300919C4A /* GlobalConstant.swift */,
+				186D0E832591EE4300919C4A /* Extension.swift */,
+				186D0E892591FC9300919C4A /* ObtainHeight.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		6235CB1259FB28E226714549 /* Pods */ = {
@@ -235,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1837C44F258B5CA900BB4288 /* LaunchScreen.storyboard in Resources */,
+				186D0E7D2591E9E900919C4A /* WeChatMomentsCell.xib in Resources */,
 				1837C44C258B5CA900BB4288 /* Assets.xcassets in Resources */,
 				1837C44A258B5CA700BB4288 /* Main.storyboard in Resources */,
 			);
@@ -290,16 +323,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				186D0E5F2590F40000919C4A /* NetworkTools.swift in Sources */,
+				186D0E882591EF9A00919C4A /* HeaderView.swift in Sources */,
 				186D0E6A2590F78400919C4A /* WeChatMomentsModel.swift in Sources */,
 				186D0E772591CFE200919C4A /* UserDefaultsUtils.swift in Sources */,
 				186D0E6E2591080E00919C4A /* DownloadAndCacheImage.swift in Sources */,
+				186D0E7C2591E9E900919C4A /* WeChatMomentsCell.swift in Sources */,
 				1837C447258B5CA700BB4288 /* WeChatMomentsViewController.swift in Sources */,
+				186D0E822591EDF300919C4A /* GlobalConstant.swift in Sources */,
+				186D0E842591EE4300919C4A /* Extension.swift in Sources */,
 				186D0E642590F73000919C4A /* WeChatMomentsInteractor.swift in Sources */,
 				1837C443258B5CA700BB4288 /* AppDelegate.swift in Sources */,
 				186D0E7125919EC200919C4A /* DictionaryConvertToModel.swift in Sources */,
 				186D0E622590F6D200919C4A /* WeChatMomentsPresenter.swift in Sources */,
+				186D0E8A2591FC9300919C4A /* ObtainHeight.swift in Sources */,
+				186D0E862591EEBE00919C4A /* ImagesView.swift in Sources */,
 				186D0E682590F76D00919C4A /* WeChatMomentsWorker.swift in Sources */,
 				186D0E662590F75800919C4A /* WeChatMomentsRouter.swift in Sources */,
+				186D0E7F2591EC8A00919C4A /* CommentView.swift in Sources */,
 				1837C445258B5CA700BB4288 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -40,4 +40,18 @@ struct UserDefaultsUtils {
             return nil
         }
     }
+    
+    
+    func obtainTotalModels() -> [TweetsForm]? {
+        if let objects = UserDefaults.standard.value(forKey: UserDefaultsKey.TweetsForm) as? Data {
+            let decoder = JSONDecoder()
+            if let objects = try? decoder.decode(Array.self, from: objects) as [TweetsForm] {
+                return objects
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
 }

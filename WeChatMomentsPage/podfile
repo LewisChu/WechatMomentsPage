@@ -6,5 +6,6 @@ use_frameworks!
 target 'WeChatMomentsPage' do
 
 pod 'AFNetworking', '~> 4.0.1'
+pod 'MJRefresh', '~> 3.1.15.7'
 
 end

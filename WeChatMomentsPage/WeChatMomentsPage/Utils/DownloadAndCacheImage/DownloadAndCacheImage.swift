@@ -12,7 +12,7 @@ let MomentsImagesPath = "/Documents/MomentsPhotoCache/"
 
 class DownloadAndCacheImage: NSObject {
     
-    struct Constant {
+    private struct Constant {
         static let PrefixCount = 15
         static let SuffixCount = 20
         static let TypeCount = 4
@@ -76,12 +76,7 @@ class DownloadAndCacheImage: NSObject {
         }
         
         let imagePath = path + getImageName(filePath: fileName)
-        
-        do {
-            try data.write(to: URL(fileURLWithPath: imagePath))
-        } catch let error  {
-            print(error.localizedDescription)
-        }
+        try? data.write(to: URL(fileURLWithPath: imagePath))
     }
     
     // find for local sandbox
@@ -96,8 +91,7 @@ class DownloadAndCacheImage: NSObject {
             let readHandler = try FileHandle(forReadingFrom:file)
             let data = readHandler.readDataToEndOfFile()
             return data
-        } catch let error {
-            print(error.localizedDescription)
+        } catch _ {
             return nil
         }
     }
