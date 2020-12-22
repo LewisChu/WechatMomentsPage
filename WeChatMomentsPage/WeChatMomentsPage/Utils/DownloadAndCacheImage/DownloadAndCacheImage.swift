@@ -8,10 +8,15 @@
 
 import UIKit
 
-
 let MomentsImagesPath = "/Documents/MomentsPhotoCache/"
 
 class DownloadAndCacheImage: NSObject {
+    
+    struct Constant {
+        static let PrefixCount = 15
+        static let SuffixCount = 20
+        static let TypeCount = 4
+    }
     
     static let shard: DownloadAndCacheImage = DownloadAndCacheImage()
     var cache = NSCache<AnyObject, AnyObject>()
@@ -105,6 +110,6 @@ class DownloadAndCacheImage: NSObject {
             .replacingOccurrences(of: "+", with: "")
             .replacingOccurrences(of: "/", with: "")
         // get prefix15 and suffix 20
-        return String(baseString!.prefix(15) + baseString!.suffix(20) + filePath.suffix(4))
+        return String(baseString!.prefix(Constant.PrefixCount) + baseString!.suffix(Constant.SuffixCount) + filePath.suffix(Constant.TypeCount))
     }
 }

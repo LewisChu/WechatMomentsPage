@@ -10,8 +10,11 @@ import UIKit
 
 // Presenter output
 protocol WeChatMomentsDisplayLogic: class {
-//    func loginSuccessfulDisplay(_ response: LoginResponsData?)
-//    func loginErrorDisplay(_ response: BaseResponse?)
+    func getUserInfoSuccess(_ userInfo: UserInfo)
+    func getUserInfoFailure()
+    
+    func getTweetsFromSuccess(_ tweetsForms: [TweetsForm])
+    func getTweetsFromFailure()
 }
 
 class WeChatMomentsViewController: UIViewController {
@@ -45,10 +48,30 @@ class WeChatMomentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.interactor?.obtainInforBusiness()
+        
+        
+        
         
     }
 }
 
 extension WeChatMomentsViewController: WeChatMomentsDisplayLogic {
+    func getUserInfoSuccess(_ userInfo: UserInfo) {
+        print(userInfo)
+    }
     
+    func getUserInfoFailure() {
+        
+    }
+    
+    func getTweetsFromSuccess(_ tweetsForms: [TweetsForm]) {
+        print(tweetsForms.count)
+    }
+    
+    func getTweetsFromFailure() {
+        
+    }
 }
+
+

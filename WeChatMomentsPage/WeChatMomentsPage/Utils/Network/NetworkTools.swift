@@ -25,7 +25,7 @@ class NetworkTools: AFHTTPSessionManager {
 }
 
 extension NetworkTools {
-    func request(methodType : HTTPRequestType, urlString : String, parameters : [String : Any], finished: @escaping (_ results : [String: Any]?, _ statusCode: Int?, _ error : Error?)-> ())  {
+    func request(methodType : HTTPRequestType, urlString : String, parameters : [String : Any]?, finished: @escaping (_ results : Any?, _ statusCode: Int?, _ error : Error?)-> ())  {
         // 1. request is successful
         let successCallBack = {(task :URLSessionDataTask, result : Any) in
             var statusCodeTemp: Int?
@@ -33,10 +33,7 @@ extension NetworkTools {
             if let urlResponseTemp = urlResponse as? HTTPURLResponse {
                 statusCodeTemp = urlResponseTemp.statusCode
             }
-            if let resultTamp = result as? [String: Any] {
-                finished(resultTamp, statusCodeTemp, nil)
-            }
-            finished(nil, statusCodeTemp, nil)
+            finished(result, statusCodeTemp, nil)
         }
         // 2. request is failure
         let failureCallBack = {(task : URLSessionDataTask?, error :Error) in

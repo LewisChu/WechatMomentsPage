@@ -9,6 +9,7 @@
 
 // ViewContoller output
 protocol WeChatMomentsBusinessLogic {
+    func obtainInforBusiness()
 }
 
 class WeChatMomentsInteractor {
@@ -18,4 +19,20 @@ class WeChatMomentsInteractor {
 
 extension WeChatMomentsInteractor: WeChatMomentsBusinessLogic {
     
+    func obtainInforBusiness() {
+        self.worker = WeChatMomentsWorker()
+        self.worker?.request(userInforCompletion: { (userInfor) in
+            if let userInfoModel = userInfor {
+                self.presenter?.userInfoSuccessfulPresentation(userInfoModel)
+            } else {
+                self.presenter?.userInfoFailedPresentation()
+            }
+        }, tweetsFormCompletion: { (tweetsForm) in
+            if let tweetsFormModel = tweetsForm {
+                self.presenter?.tweetsFormSuccessfulPresentation(tweetsFormModel)
+            } else {
+                self.presenter?.tweetsFormFailedPresentation()
+            }
+        })
+    }
 }

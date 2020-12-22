@@ -20,6 +20,8 @@
 		186D0E682590F76D00919C4A /* WeChatMomentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E672590F76D00919C4A /* WeChatMomentsWorker.swift */; };
 		186D0E6A2590F78400919C4A /* WeChatMomentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E692590F78400919C4A /* WeChatMomentsModel.swift */; };
 		186D0E6E2591080E00919C4A /* DownloadAndCacheImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E6D2591080E00919C4A /* DownloadAndCacheImage.swift */; };
+		186D0E7125919EC200919C4A /* DictionaryConvertToModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E7025919EC200919C4A /* DictionaryConvertToModel.swift */; };
+		186D0E772591CFE200919C4A /* UserDefaultsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E762591CFE200919C4A /* UserDefaultsUtils.swift */; };
 		32F7B252A0C0D007517B14E8 /* Pods_WeChatMomentsPage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B298C89F75562B96B9C42B8 /* Pods_WeChatMomentsPage.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		186D0E672590F76D00919C4A /* WeChatMomentsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeChatMomentsWorker.swift; sourceTree = "<group>"; };
 		186D0E692590F78400919C4A /* WeChatMomentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeChatMomentsModel.swift; sourceTree = "<group>"; };
 		186D0E6D2591080E00919C4A /* DownloadAndCacheImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadAndCacheImage.swift; sourceTree = "<group>"; };
+		186D0E7025919EC200919C4A /* DictionaryConvertToModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryConvertToModel.swift; sourceTree = "<group>"; };
+		186D0E762591CFE200919C4A /* UserDefaultsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtils.swift; sourceTree = "<group>"; };
 		1B298C89F75562B96B9C42B8 /* Pods_WeChatMomentsPage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeChatMomentsPage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2793A2D6E26D656670D3707 /* Pods-WeChatMomentsPage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeChatMomentsPage.debug.xcconfig"; path = "Target Support Files/Pods-WeChatMomentsPage/Pods-WeChatMomentsPage.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1605CFB901410E8D6CA06A /* Pods-WeChatMomentsPage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeChatMomentsPage.release.xcconfig"; path = "Target Support Files/Pods-WeChatMomentsPage/Pods-WeChatMomentsPage.release.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 		186D0E5C2590ADA500919C4A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				186D0E752591CF8D00919C4A /* SaveInfor */,
+				186D0E6F25919E7A00919C4A /* Decoder */,
 				186D0E6C259107BA00919C4A /* DownloadAndCacheImage */,
 				186D0E5D2590ADB600919C4A /* Network */,
 			);
@@ -133,6 +139,22 @@
 				186D0E6D2591080E00919C4A /* DownloadAndCacheImage.swift */,
 			);
 			path = DownloadAndCacheImage;
+			sourceTree = "<group>";
+		};
+		186D0E6F25919E7A00919C4A /* Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				186D0E7025919EC200919C4A /* DictionaryConvertToModel.swift */,
+			);
+			path = Decoder;
+			sourceTree = "<group>";
+		};
+		186D0E752591CF8D00919C4A /* SaveInfor */ = {
+			isa = PBXGroup;
+			children = (
+				186D0E762591CFE200919C4A /* UserDefaultsUtils.swift */,
+			);
+			path = SaveInfor;
 			sourceTree = "<group>";
 		};
 		6235CB1259FB28E226714549 /* Pods */ = {
@@ -269,10 +291,12 @@
 			files = (
 				186D0E5F2590F40000919C4A /* NetworkTools.swift in Sources */,
 				186D0E6A2590F78400919C4A /* WeChatMomentsModel.swift in Sources */,
+				186D0E772591CFE200919C4A /* UserDefaultsUtils.swift in Sources */,
 				186D0E6E2591080E00919C4A /* DownloadAndCacheImage.swift in Sources */,
 				1837C447258B5CA700BB4288 /* WeChatMomentsViewController.swift in Sources */,
 				186D0E642590F73000919C4A /* WeChatMomentsInteractor.swift in Sources */,
 				1837C443258B5CA700BB4288 /* AppDelegate.swift in Sources */,
+				186D0E7125919EC200919C4A /* DictionaryConvertToModel.swift in Sources */,
 				186D0E622590F6D200919C4A /* WeChatMomentsPresenter.swift in Sources */,
 				186D0E682590F76D00919C4A /* WeChatMomentsWorker.swift in Sources */,
 				186D0E662590F75800919C4A /* WeChatMomentsRouter.swift in Sources */,
