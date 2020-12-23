@@ -21,7 +21,6 @@ protocol WeChatMomentsDisplayLogic: class {
 class WeChatMomentsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var activityView: UIActivityIndicatorView!
     
     // tableView header
     lazy var headerView = HeaderView()
@@ -65,13 +64,17 @@ class WeChatMomentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setupUI()
-        // load datas
-        self.interactor?.obtainInforBusiness()
         // observer  keyboard
         NotificationCenter.default.addObserver(self, selector:#selector(keyBoardWillShow(note:)), name:UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(keyBoardWillHide(note:)), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        // load datas
+        ActivityView.shared.start()
+        self.interactor?.obtainInforBusiness()
     }
     
     func setupUI() {
@@ -84,18 +87,12 @@ class WeChatMomentsViewController: UIViewController {
         self.tableView.mj_footer = footer
         footer.setTitle("", for: .idle)
         
-        
-        self.activityView.color = UIColor.red
-        self.activityView.hidesWhenStopped = true
-        
         self.commentView.frame = CGRect(x: 0, y: 0, width: Constant.ScreenWidth, height: 40)
         self.commentView.isHidden = true
         self.view.addSubview(self.commentView)
         self.view.bringSubviewToFront(self.commentView)
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
-        
-        
     }
     
     
@@ -213,17 +210,16 @@ extension WeChatMomentsViewController: WeChatMomentsDisplayLogic {
     }
     
     func getUserInfoFailure() {
-        
+        AlertView.shard.show("geting data is failure!, please try drag-down to refresh!")
     }
     
     func getTweetsFromSuccess(_ tweetsForms: [TweetsForm]) {
-        print(tweetsForms.count)
         self.tableViewDatas = tweetsForms
         self.tableView.reloadData()
     }
     
     func getTweetsFromFailure() {
-        
+        AlertView.shard.show("geting data is failure!, please try drag-down to refresh!")
     }
 }
 

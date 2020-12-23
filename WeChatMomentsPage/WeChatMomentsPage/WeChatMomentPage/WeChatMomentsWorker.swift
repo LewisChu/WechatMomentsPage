@@ -28,6 +28,7 @@ class WeChatMomentsWorker: NSObject {
             NetworkTools.shareInstance.request(methodType: .GET, urlString: RequestUrl.UserInfor, parameters: nil) { (result, _, error) in
                 if (error != nil) {
                     userInforCompletion(nil)
+                    ActivityView.shared.stop()
                     return
                 }
                 if let response = result as? [String: Any]{
@@ -43,6 +44,7 @@ class WeChatMomentsWorker: NSObject {
             NetworkTools.shareInstance.request(methodType: .GET, urlString: RequestUrl.Tweets, parameters: nil) { (result, _, error) in
                 if (error != nil) {
                     tweetsFormCompletion(nil)
+                    ActivityView.shared.stop()
                     return
                 }
                 if let response = result as? [[String: Any]]{
@@ -53,9 +55,8 @@ class WeChatMomentsWorker: NSObject {
             }
         }
         
-        
-        
         group.notify(queue: .main) {
+            ActivityView.shared.stop()
         }
     }
     

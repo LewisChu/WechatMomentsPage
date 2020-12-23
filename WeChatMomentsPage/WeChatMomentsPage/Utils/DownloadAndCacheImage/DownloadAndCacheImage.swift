@@ -54,8 +54,7 @@ class DownloadAndCacheImage: NSObject {
                     self?.writeImageToSandbox(fileName: url, data: data!)
                 }
                 return
-            } catch let error {
-                print(error.localizedDescription)
+            } catch _ {
                 return
             }
         }
