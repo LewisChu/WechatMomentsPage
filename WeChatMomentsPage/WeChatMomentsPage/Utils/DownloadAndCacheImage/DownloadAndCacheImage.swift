@@ -30,7 +30,6 @@ class DownloadAndCacheImage: NSObject {
                 }
                 return
             }
-            
             // Second: find from local
             data = self?.readImageFromSandbox(fileName: url)
             if data != nil {
@@ -39,7 +38,6 @@ class DownloadAndCacheImage: NSObject {
                 }
                 return
             }
-            
             // last: download
             do {
                 let imgUrl = URL(string: url)

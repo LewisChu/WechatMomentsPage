@@ -10,8 +10,8 @@ import UIKit
 
 class ImagesView: UIView {
     
-    var imagesArray: [String] = []
-    var imgArrs: [UIImageView] = []
+    lazy var imagesArray: [String] = []
+    lazy var imgArrs: [UIImageView] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)

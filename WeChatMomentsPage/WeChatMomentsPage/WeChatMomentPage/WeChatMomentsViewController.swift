@@ -40,6 +40,12 @@ class WeChatMomentsViewController: UIViewController {
     var router: WeChatMomentsRoutingLogic?
     // MARK: VIP Circle Parameter end
     
+    struct ControllerConstant {
+//        static let CellReuseIdentifier = "WeChatMomentsCellID"
+        static let DefaultTag = 2000
+    }
+    
+    static let CellReuseIdentifier = "WeChatMomentsCellID"
     private func setup() {
         let viewController = self
         let presenter = WeChatMomentsPresenter()
@@ -78,20 +84,19 @@ class WeChatMomentsViewController: UIViewController {
     }
     
     func setupUI() {
-        self.headerView.frame = CGRect(x: 0, y: 0, width: Constant.ScreenWidth, height: Constant.HeaderViewHeight)
+        // setup tableview
         self.tableView.tableHeaderView = self.headerView
         self.tableView.tableFooterView = UIView()
+//        self.tableView.register(UINib(nibName: "WeChatMomentsCell", bundle: nil), forCellReuseIdentifier: WeChatMomentsViewController.CellReuseIdentifier)
         header.setRefreshingTarget(self, refreshingAction: #selector(headerRefresh))
         self.tableView.mj_header = header
         footer.setRefreshingTarget(self, refreshingAction: #selector(footerRefresh))
         self.tableView.mj_footer = footer
         footer.setTitle("", for: .idle)
-        
-        self.commentView.frame = CGRect(x: 0, y: 0, width: Constant.ScreenWidth, height: 40)
         self.commentView.isHidden = true
+        self.commentView.delegate = self
         self.view.addSubview(self.commentView)
         self.view.bringSubviewToFront(self.commentView)
-        
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
     }
     
@@ -130,43 +135,10 @@ class WeChatMomentsViewController: UIViewController {
     
     //click comment button
     @objc func commentsClick(btn: UIButton) {
-        print(btn.tag)
         self.commentView.commentTextField.becomeFirstResponder()
-        self.commentView.sendBtn.tag = btn.tag - 2000
-        self.commentView.sendBtn.addTarget(self, action: #selector(sendComment(sender:)), for:.touchUpInside)
+//        self.commentView.sendButton.tag = btn.tag - 2000
     }
     
-    //click send for comment
-    @objc func sendComment(sender: UIButton)  {
-        
-        print(sender.tag)
-        let textContent = self.commentView.commentTextField.text?.trimmingCharacters(in: .whitespaces)
-        self.commentView.commentTextField.resignFirstResponder()
-        self.commentView.isHidden = true
-        if (textContent?.count)! > 0{
-            
-//            let tweetsInfo: TweetsForm =  self.tableViewDatas[sender.tag]
-//            let dic = ["content": textContent ?? "","sender" : ["username": tweetsInfo.sender?.username,"nick": tweetsInfo.sender?.nick,"avatar": tweetsInfo.sender?.avatar]] as [String : Any]
-//            do{
-//                let jsonData = try JSONSerialization.data(withJSONObject: dic, options: [])
-//                let com = try DecodeModels.shared.JSONModel(Comments.self, jsonData)
-//
-//                if let comments = tweetsInfo.comments{
-//                    var tempComments = comments
-//                    tempComments.append(com)
-//                    tweetsInfo.comments = tempComments
-//                }else{
-//                    tweetsInfo.comments = [com]
-//                }
-//                self.tableViewDatas[sender.tag] = tweetsInfo
-//                self.totaltableViewDatas[sender.tag] = tweetsInfo
-//                let indexPath = IndexPath(row: sender.tag, section: 0)
-//                self.tabView.reloadRows(at: [indexPath], with: .automatic)
-//            }catch{
-//
-//            }
-        }
-    }
     
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -179,11 +151,11 @@ class WeChatMomentsViewController: UIViewController {
     
     @objc func keyBoardWillShow(note:NSNotification) {
         let userInfo  = note.userInfo! as NSDictionary
-        let keyBoardBounds = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let deltaY = keyBoardBounds.size.height
-        let commentY = Constant.ScreenHeight - deltaY - 40
+        let keyboardBounds = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardHeight = keyboardBounds.size.height
+        let commentOriginY = Constant.ScreenHeight - keyboardHeight - self.commentView.frame.size.height
         var frame = self.commentView.frame
-        frame.origin.y = commentY
+        frame.origin.y = commentOriginY
         self.commentView.frame = frame
         self.commentView.isHidden = false
         self.commentView.commentTextField.text = ""
@@ -231,34 +203,36 @@ extension WeChatMomentsViewController: UITableViewDelegate, UITableViewDataSourc
         return 1
     }
      
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return tableViewDatas.count
-     }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableViewDatas.count
+    }
      
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let reuseIdentifier = "staticCellReuseIdentifier - \(indexPath.description)"
-         var cell: WeChatMomentsCell? = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? WeChatMomentsCell)
-         if cell == nil {
-             cell  = Bundle.main.loadNibNamed("WeChatMomentsCell", owner: self, options: nil)?.last as? WeChatMomentsCell
-         }
-         let tweetsForm = self.tableViewDatas[indexPath.row]
-         cell?.commentBtn.tag = 2000 + indexPath.row
-         cell?.commentBtn.addTarget(self, action: #selector(commentsClick), for: .touchUpInside)
-         cell?.setDatas(tweetsForm)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let reuseIdentifier = "staticCellReuseIdentifier - \(indexPath.description)"
+        var cell: WeChatMomentsCell? = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? WeChatMomentsCell)
+        if cell == nil {
+            cell  = Bundle.main.loadNibNamed("WeChatMomentsCell", owner: self, options: nil)?.last as? WeChatMomentsCell
+        }
+        let tweetsForm = self.tableViewDatas[indexPath.row]
+        cell?.commentBtn.tag = ControllerConstant.DefaultTag + indexPath.row
+        cell?.commentBtn.addTarget(self, action: #selector(commentsClick), for: .touchUpInside)
+        cell?.setDatas(tweetsForm)
         cell?.selectionStyle = .none
-         return cell!
-     }
-     
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
          
-         var nickHei = CGFloat(0)
-         var imagesHei = CGFloat(0)
-         var commentssHei = CGFloat(0)
+        var nickHei = CGFloat(0)
+        var imagesHei = CGFloat(0)
+        var commentssHei = CGFloat(0)
          
-         let tweetsForm = self.tableViewDatas[indexPath.row]
-         if let content = tweetsForm.content {
+        let tweetsForm = self.tableViewDatas[indexPath.row]
+        if let content = tweetsForm.content {
+        
             nickHei = ObtainHeight.shared.getHeightViaWidth(15, Constant.ScreenWidth - 80, content)
          }
+        
          if let tempImages = tweetsForm.images{
              var imgUrlArray: [String] = []
              for i in 0..<tempImages.count{
@@ -305,4 +279,11 @@ extension WeChatMomentsViewController: UITableViewDelegate, UITableViewDataSourc
          tableView.deselectRow(at: indexPath, animated: true)
      }
     
+}
+
+extension WeChatMomentsViewController: ClickSendDelegate {
+    func clickSendButton() {
+        self.commentView.commentTextField.resignFirstResponder()
+        AlertView.shard.show("clicked send!")
+    }
 }
