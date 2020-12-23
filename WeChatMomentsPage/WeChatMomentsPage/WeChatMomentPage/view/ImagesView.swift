@@ -10,34 +10,38 @@ import UIKit
 
 class ImagesView: UIView {
     
-    lazy var imagesArray: [String] = []
-    lazy var imgArrs: [UIImageView] = []
+    private struct ImageViewConstant {
+        static let ImageDefaultTag = 1000
+    }
+    
+    lazy var imagesUrlArray: [String] = []
+    lazy var imagesViewArray: [UIImageView] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         for i in 0..<9{
             let imageView = UIImageView(frame: CGRect.zero)
-            imageView.tag = 1000 + i
+            imageView.tag = ImageViewConstant.ImageDefaultTag + i
             self.addSubview(imageView)
-            self.imgArrs.append(imageView)
+            self.imagesViewArray.append(imageView)
         }
         
         
     }
     
     func setDatas(_ imageArray: [String]){
-        self.imagesArray = imageArray
-        for tempImgView in self.imgArrs {
+        self.imagesUrlArray = imageArray
+        for tempImgView in self.imagesViewArray {
             tempImgView.isHidden = true
         }
         let imgWidthAndHeight: CGFloat = (self.frame.size.width - 20)/3
-        if imagesArray.count == 1 {
+        if imagesUrlArray.count == 1 {
             self.setImagesViewHeight(hei: imgWidthAndHeight * 2)
             var imgView = UIImageView()
             imgView.frame = CGRect(x: 0, y: 0, width: 200, height: 100 )
-            imgView = self.viewWithTag(1000) as! UIImageView
+            imgView = self.viewWithTag(ImageViewConstant.ImageDefaultTag) as! UIImageView
             imgView.isHidden = false
-            DownloadAndCacheImage.shard.obtainImage(imagesArray[0]) { (data, url) in
+            DownloadAndCacheImage.shard.obtainImage(imagesUrlArray[0]) { (data, url) in
                 if let imageData = data{
                     let img = UIImage(data: imageData)
                     let newImg = self.resizeImage(image: img!, newHeight: imgWidthAndHeight * 2)
@@ -49,19 +53,19 @@ class ImagesView: UIView {
                     self.addSubview(imgView)
                 }
             }
-        }else if imagesArray.count > 1{
-            let totalRow = Int((imagesArray.count - 1)/3) + 1
+        }else if imagesUrlArray.count > 1{
+            let totalRow = Int((imagesUrlArray.count - 1)/3) + 1
             self.setImagesViewHeight(hei: imgWidthAndHeight * CGFloat(totalRow) + CGFloat((totalRow>1 ? (totalRow - 1)*10 : 0)))
             
-            for i in 0..<imagesArray.count {
+            for i in 0..<imagesUrlArray.count {
                 let column = i%3
                 let row = Int(i/3)
                 var imgView = UIImageView()
-                imgView = self.viewWithTag(1000 + i) as! UIImageView
+                imgView = self.viewWithTag(ImageViewConstant.ImageDefaultTag + i) as! UIImageView
                 imgView.isHidden = false
                 imgView.frame = CGRect(x: CGFloat(column) * (imgWidthAndHeight + 10), y: CGFloat(row) * (imgWidthAndHeight + 10), width: imgWidthAndHeight, height: imgWidthAndHeight)
                 
-                DownloadAndCacheImage.shard.obtainImage(imagesArray[i]) { (data, url) in
+                DownloadAndCacheImage.shard.obtainImage(imagesUrlArray[i]) { (data, url) in
                     if let imageData = data{
                         let img = UIImage(data: imageData)
                         imgView.image = img

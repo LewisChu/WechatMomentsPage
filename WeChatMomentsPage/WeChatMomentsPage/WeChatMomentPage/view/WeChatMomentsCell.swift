@@ -50,6 +50,7 @@ class WeChatMomentsCell: UITableViewCell {
         self.likeAndCommentView.layer.cornerRadius = 4
         self.likeAndCommentView.layer.borderWidth = 1
         self.likeAndCommentView.layer.borderColor = UIColor.clear.cgColor
+        self.nickName.textColor = UIColor(red: 83.0/255, green: 104/255, blue: 146/255, alpha: 1)
     }
 
      
