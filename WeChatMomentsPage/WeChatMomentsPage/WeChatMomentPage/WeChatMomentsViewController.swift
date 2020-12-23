@@ -41,7 +41,6 @@ class WeChatMomentsViewController: UIViewController {
     // MARK: VIP Circle Parameter end
     
     struct ControllerConstant {
-//        static let CellReuseIdentifier = "WeChatMomentsCellID"
         static let DefaultTag = 2000
     }
     
@@ -135,7 +134,6 @@ class WeChatMomentsViewController: UIViewController {
     //click comment button
     @objc func commentsClick(btn: UIButton) {
         self.commentView.commentTextField.becomeFirstResponder()
-//        self.commentView.sendButton.tag = btn.tag - 2000
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
