@@ -25,6 +25,7 @@ class WeChatMomentsCell: UITableViewCell {
         static let CommentSize = CGFloat(13)
         static let NicknameWith = Constant.ScreenWidth - 80
         static let NicknameSize = CGFloat(15)
+        static let CellSpace = CGFloat(99)
     }
     
     
@@ -142,9 +143,51 @@ class WeChatMomentsCell: UITableViewCell {
     }
             
          
+    // get cell height
+    static func obtainHeight(_ tweetsForm: TweetsForm) -> CGFloat {
+        var nickHei = CellConstant.Zero
+        var imagesHei = CellConstant.Zero
+        var commentssHei = CellConstant.Zero
+        if let content = tweetsForm.content {
+            nickHei = ObtainHeight.shared.getHeightViaWidth(CellConstant.NicknameSize, CellConstant.NicknameWith, content)
+        }
+        if let tempImages = tweetsForm.images{
+            let imgUrlArray = tempImages.filter{ !($0.url?.isEmpty ?? true) }.map{ $0.url ?? "" }
+            switch imgUrlArray.count {
+            case 0:
+                imagesHei = CellConstant.Zero
+            case 1:
+                imagesHei = CellConstant.OneImageHeight
+            case 2..<4:
+                imagesHei = CellConstant.TwoToThreeImagesHeight
+            case 4..<7:
+                imagesHei = CellConstant.FourToSixImagesHeight
+            default:
+                imagesHei = CellConstant.DefaultImagesHeight
+            }
+        }
+         
+        if let comments = tweetsForm.comments {
             
+            var commentsHeight = CGFloat(0)
+            for comment in comments {
+                var name = ""
+                var commentContent = ""
+                if let sender = comment.sender,let commentsNick = sender.nick{
+                    name = commentsNick + "："
+                }
+                if let commentsContent = comment.content{
+                    commentContent = commentsContent
+                }
+                let singleComment = name + commentContent
+                let tempCommentHeight = ObtainHeight.shared.getHeightViaWidth(CellConstant.CommentSize, CellConstant.CommentWidth, singleComment)
+                commentsHeight += tempCommentHeight + CellConstant.CommentLineSpace
+            }
+            commentssHei = commentsHeight
+        }
+        return CellConstant.CellSpace + nickHei  + imagesHei + commentssHei
+    }
             
-
       
     override func setSelected(_ selected: Bool, animated: Bool) {
           super.setSelected(selected, animated: animated)

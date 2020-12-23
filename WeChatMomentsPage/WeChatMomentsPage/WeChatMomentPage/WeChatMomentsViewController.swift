@@ -82,12 +82,11 @@ class WeChatMomentsViewController: UIViewController {
         ActivityView.shared.start()
         self.interactor?.obtainInforBusiness()
     }
-    
+
+    // setup tableview
     func setupUI() {
-        // setup tableview
         self.tableView.tableHeaderView = self.headerView
         self.tableView.tableFooterView = UIView()
-//        self.tableView.register(UINib(nibName: "WeChatMomentsCell", bundle: nil), forCellReuseIdentifier: WeChatMomentsViewController.CellReuseIdentifier)
         header.setRefreshingTarget(self, refreshingAction: #selector(headerRefresh))
         self.tableView.mj_header = header
         footer.setRefreshingTarget(self, refreshingAction: #selector(footerRefresh))
@@ -139,8 +138,6 @@ class WeChatMomentsViewController: UIViewController {
 //        self.commentView.sendButton.tag = btn.tag - 2000
     }
     
-    
-    
     @objc func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             self.commentView.commentTextField.resignFirstResponder()
@@ -165,6 +162,39 @@ class WeChatMomentsViewController: UIViewController {
         self.commentView.isHidden = true
     }
 }
+
+extension WeChatMomentsViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableViewDatas.count
+    }
+     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let reuseIdentifier = "staticCellReuseIdentifier - \(indexPath.description)"
+        var cell: WeChatMomentsCell? = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? WeChatMomentsCell)
+        if cell == nil {
+            cell  = Bundle.main.loadNibNamed("WeChatMomentsCell", owner: self, options: nil)?.last as? WeChatMomentsCell
+        }
+        let tweetsForm = self.tableViewDatas[indexPath.row]
+        cell?.commentBtn.tag = ControllerConstant.DefaultTag + indexPath.row
+        cell?.commentBtn.addTarget(self, action: #selector(commentsClick), for: .touchUpInside)
+        cell?.setDatas(tweetsForm)
+        cell?.selectionStyle = .none
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return WeChatMomentsCell.obtainHeight(self.tableViewDatas[indexPath.row])
+    }
+     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
 
 extension WeChatMomentsViewController: WeChatMomentsDisplayLogic {
     func getUserInfoSuccess(_ userInfo: UserInfo) {
@@ -195,91 +225,6 @@ extension WeChatMomentsViewController: WeChatMomentsDisplayLogic {
     }
 }
 
-
-extension WeChatMomentsViewController: UITableViewDelegate, UITableViewDataSource {
-
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewDatas.count
-    }
-     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let reuseIdentifier = "staticCellReuseIdentifier - \(indexPath.description)"
-        var cell: WeChatMomentsCell? = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? WeChatMomentsCell)
-        if cell == nil {
-            cell  = Bundle.main.loadNibNamed("WeChatMomentsCell", owner: self, options: nil)?.last as? WeChatMomentsCell
-        }
-        let tweetsForm = self.tableViewDatas[indexPath.row]
-        cell?.commentBtn.tag = ControllerConstant.DefaultTag + indexPath.row
-        cell?.commentBtn.addTarget(self, action: #selector(commentsClick), for: .touchUpInside)
-        cell?.setDatas(tweetsForm)
-        cell?.selectionStyle = .none
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         
-        var nickHei = CGFloat(0)
-        var imagesHei = CGFloat(0)
-        var commentssHei = CGFloat(0)
-         
-        let tweetsForm = self.tableViewDatas[indexPath.row]
-        if let content = tweetsForm.content {
-        
-            nickHei = ObtainHeight.shared.getHeightViaWidth(15, Constant.ScreenWidth - 80, content)
-         }
-        
-         if let tempImages = tweetsForm.images{
-             var imgUrlArray: [String] = []
-             for i in 0..<tempImages.count{
-                 if let imgUrl = tempImages[i].url{
-                     imgUrlArray.append(imgUrl)
-                 }
-             }
-             if imgUrlArray.count>=1{
-                 if imgUrlArray.count == 1{
-                     imagesHei = (Constant.ScreenWidth - 120)*2/3
-                 }else if  imgUrlArray.count < 4{
-                     imagesHei = (Constant.ScreenWidth - 120)/3
-                 }else if imgUrlArray.count < 7 {
-                     imagesHei = (Constant.ScreenWidth - 120)*2/3 + 10
-                 }else {
-                     imagesHei = (Constant.ScreenWidth - 120) + 20
-                 }
-             }
-         }
-         
-         if let comments = tweetsForm.comments{
-             var commentsHeight = CGFloat(0)
-             for comment in comments {
-                 var nameStr = ""
-                 var commentsContentStr = ""
-                 var commentStr = ""
-                 if let sender = comment.sender,let commentsNick = sender.nick{
-                     nameStr = commentsNick + "："
-                 }
-                 if let commentsContent = comment.content{
-                     commentsContentStr = commentsContent
-                 }
-                 commentStr = nameStr + commentsContentStr
-                 let tempCommentHeight = ObtainHeight.shared.getHeightViaWidth(13, Constant.ScreenWidth - 80 - 16, commentStr)
-                 commentsHeight += tempCommentHeight + 4
-             }
-             commentssHei = commentsHeight
-         }
-         return 16 + 21 + 8 + nickHei + 8 + imagesHei + 30 + commentssHei + 16
-     }
-     
-   
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         tableView.deselectRow(at: indexPath, animated: true)
-     }
-    
-}
 
 extension WeChatMomentsViewController: ClickSendDelegate {
     func clickSendButton() {
