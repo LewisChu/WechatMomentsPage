@@ -13,6 +13,7 @@
 		1837C44A258B5CA700BB4288 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1837C448258B5CA700BB4288 /* Main.storyboard */; };
 		1837C44C258B5CA900BB4288 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1837C44B258B5CA900BB4288 /* Assets.xcassets */; };
 		1837C44F258B5CA900BB4288 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1837C44D258B5CA900BB4288 /* LaunchScreen.storyboard */; };
+		18422D70259DAB8B000D61E2 /* FilePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18422D6F259DAB8B000D61E2 /* FilePaths.swift */; };
 		186D0E5F2590F40000919C4A /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E5E2590F40000919C4A /* NetworkTools.swift */; };
 		186D0E622590F6D200919C4A /* WeChatMomentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E612590F6D200919C4A /* WeChatMomentsPresenter.swift */; };
 		186D0E642590F73000919C4A /* WeChatMomentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186D0E632590F73000919C4A /* WeChatMomentsInteractor.swift */; };
@@ -45,6 +46,7 @@
 		1837C44B258B5CA900BB4288 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1837C44E258B5CA900BB4288 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1837C450258B5CA900BB4288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18422D6F259DAB8B000D61E2 /* FilePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePaths.swift; sourceTree = "<group>"; };
 		186D0E5E2590F40000919C4A /* NetworkTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		186D0E612590F6D200919C4A /* WeChatMomentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeChatMomentsPresenter.swift; sourceTree = "<group>"; };
 		186D0E632590F73000919C4A /* WeChatMomentsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeChatMomentsInteractor.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				186D0E832591EE4300919C4A /* Extension.swift */,
 				186D0E892591FC9300919C4A /* ObtainHeight.swift */,
 				18F8ED1E2592F6F20036F432 /* AlertView.swift */,
+				18422D6F259DAB8B000D61E2 /* FilePaths.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				186D0E8A2591FC9300919C4A /* ObtainHeight.swift in Sources */,
 				18F8ED1D2592E8360036F432 /* FundamentalUtils.swift in Sources */,
 				186D0E862591EEBE00919C4A /* ImagesView.swift in Sources */,
+				18422D70259DAB8B000D61E2 /* FilePaths.swift in Sources */,
 				186D0E682590F76D00919C4A /* WeChatMomentsWorker.swift in Sources */,
 				186D0E662590F75800919C4A /* WeChatMomentsRouter.swift in Sources */,
 				186D0E7F2591EC8A00919C4A /* CommentView.swift in Sources */,

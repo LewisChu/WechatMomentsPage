@@ -8,14 +8,13 @@
 
 import UIKit
 
-let MomentsImagesPath = "/Documents/MomentsPhotoCache/"
-
 class DownloadAndCacheImage: NSObject {
     
     private struct Constant {
         static let PrefixCount = 15
         static let SuffixCount = 20
         static let TypeCount = 4
+        static let Path = FilePath().LocalPath
     }
     
     static let shard: DownloadAndCacheImage = DownloadAndCacheImage()
@@ -66,29 +65,24 @@ class DownloadAndCacheImage: NSObject {
     
     // write to local
     private func writeImageToSandbox(fileName: String, data: Data) {
-        let path: String = NSHomeDirectory() + MomentsImagesPath
         let fileManager = FileManager.default
-        if !fileManager.fileExists(atPath: path){
-            try? fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+        if !fileManager.fileExists(atPath: Constant.Path){
+            try? fileManager.createDirectory(atPath: Constant.Path, withIntermediateDirectories: true, attributes: nil)
         }
         
-        let imagePath = path + getImageName(filePath: fileName)
+        let imagePath = Constant.Path + getImageName(filePath: fileName)
         try? data.write(to: URL(fileURLWithPath: imagePath))
     }
     
     // find for local sandbox
     private func readImageFromSandbox(fileName: String) -> Data? {
-        let fileManager = FileManager.default
         let imageName = getImageName(filePath: fileName)
-        let urlsForDocDirectory = fileManager.urls(for: .documentDirectory, in:.userDomainMask)
-        let docPath = urlsForDocDirectory[0]
-        let file = docPath.appendingPathComponent(MomentsImagesPath + imageName)
-        
+        let file = Constant.Path + imageName
         do {
-            let readHandler = try FileHandle(forReadingFrom:file)
+            let readHandler = try FileHandle(forReadingFrom: URL(string: file)!)
             let data = readHandler.readDataToEndOfFile()
             return data
-        } catch _ {
+        } catch {
             return nil
         }
     }
