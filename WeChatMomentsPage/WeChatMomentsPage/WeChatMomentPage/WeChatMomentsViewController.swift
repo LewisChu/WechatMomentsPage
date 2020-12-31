@@ -134,6 +134,8 @@ class WeChatMomentsViewController: UIViewController {
     //click comment button
     @objc func commentsClick(btn: UIButton) {
         self.commentView.commentTextField.becomeFirstResponder()
+        self.commentView.sendButton.tag = btn.tag - 2000
+        self.commentView.sendButton.addTarget(self, action: #selector(sendEvent(sender:)), for: .touchUpInside)
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -142,6 +144,10 @@ class WeChatMomentsViewController: UIViewController {
             self.commentView.isHidden = true
         }
         sender.cancelsTouchesInView = false
+    }
+    
+    @objc func sendEvent(sender: UIButton) {
+        print(sender.tag)
     }
     
     @objc func keyBoardWillShow(note:NSNotification) {

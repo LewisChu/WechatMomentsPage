@@ -31,9 +31,6 @@ class ImagesView: UIView {
     
     func setDatas(_ imageArray: [String]){
         self.imagesUrlArray = imageArray
-        for tempImgView in self.imagesViewArray {
-            tempImgView.isHidden = true
-        }
         let imgWidthAndHeight: CGFloat = (self.frame.size.width - 20)/3
         if imagesUrlArray.count == 1 {
             self.setImagesViewHeight(hei: imgWidthAndHeight * 2)
