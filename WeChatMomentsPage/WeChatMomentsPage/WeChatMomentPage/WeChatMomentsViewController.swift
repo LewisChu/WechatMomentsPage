@@ -42,9 +42,10 @@ class WeChatMomentsViewController: UIViewController {
     
     struct ControllerConstant {
         static let DefaultTag = 2000
+        static let CellReuseIdentifier = "WeChatMomentsCellID"
     }
     
-    static let CellReuseIdentifier = "WeChatMomentsCellID"
+    
     private func setup() {
         let viewController = self
         let presenter = WeChatMomentsPresenter()
@@ -96,6 +97,10 @@ class WeChatMomentsViewController: UIViewController {
         self.view.addSubview(self.commentView)
         self.view.bringSubviewToFront(self.commentView)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
+        
+        
+        
+        self.tableView.register(UINib(nibName: "WeChatMomentsCell", bundle: nil), forCellReuseIdentifier: ControllerConstant.CellReuseIdentifier)
     }
     
     
@@ -177,17 +182,20 @@ extension WeChatMomentsViewController: UITableViewDelegate, UITableViewDataSourc
     }
      
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let reuseIdentifier = "staticCellReuseIdentifier - \(indexPath.description)"
-        var cell: WeChatMomentsCell? = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? WeChatMomentsCell)
-        if cell == nil {
-            cell  = Bundle.main.loadNibNamed("WeChatMomentsCell", owner: self, options: nil)?.last as? WeChatMomentsCell
-        }
+//        let reuseIdentifier = "staticCellReuseIdentifier - \(indexPath.description)"
+//        var cell: WeChatMomentsCell? = (tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? WeChatMomentsCell)
+        
+        var cell = tableView.dequeueReusableCell(withIdentifier: ControllerConstant.CellReuseIdentifier, for: indexPath) as! WeChatMomentsCell
+        
+//        if cell == nil {
+//            cell  = Bundle.main.loadNibNamed("WeChatMomentsCell", owner: self, options: nil)?.last as? WeChatMomentsCell
+//        }
         let tweetsForm = self.tableViewDatas[indexPath.row]
-        cell?.commentBtn.tag = ControllerConstant.DefaultTag + indexPath.row
-        cell?.commentBtn.addTarget(self, action: #selector(commentsClick), for: .touchUpInside)
-        cell?.setDatas(tweetsForm)
-        cell?.selectionStyle = .none
-        return cell!
+        cell.commentBtn.tag = ControllerConstant.DefaultTag + indexPath.row
+        cell.commentBtn.addTarget(self, action: #selector(commentsClick), for: .touchUpInside)
+        cell.setDatas(tweetsForm)
+        cell.selectionStyle = .none
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

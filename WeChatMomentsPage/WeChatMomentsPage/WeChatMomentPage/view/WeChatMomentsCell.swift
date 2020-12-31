@@ -58,8 +58,13 @@ class WeChatMomentsCell: UITableViewCell {
         self.commentsView.layer.masksToBounds = true
     }
 
+
+    override func prepareForReuse() {
+        
+    }
      
     func setDatas(_ tweetsForm: TweetsForm) {
+        
         // setup avatar
         if let sender = tweetsForm.sender,let avatarUrl = sender.avatar{
             DownloadAndCacheImage.shard.obtainImage(avatarUrl) { (data, url) in
